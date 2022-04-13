@@ -7,8 +7,8 @@ GPIO,setwarnings(False)
 GPIO. setmode (GPIO. BCM)
 GPIO. setup (sound, GPIO. IN)
 GPIO.setup(red, GPIO.OUT)
-def callback( sound) :
-if GPIO.input (sound) :
+def callback( sound):
+if GPIO.input (sound):
 print ("Sound Found")
 GPIO.output(red, GPIO.HIGH)
 time.sleep(0.1)
