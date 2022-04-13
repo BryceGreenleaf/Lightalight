@@ -2,8 +2,7 @@
 import Pi.GPIO as GPTO
 import time
 sound = 12
-red
-22
+red = 22
 (GPIO,setwarnings(False)
 GPIO. setmode (GPIO. BCM)
 GPIO. setup (sound, GPIO. IN)
