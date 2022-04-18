@@ -1,21 +1,31 @@
 #!/bin/python3
-import Pi.GPIO as GPTO
+import RPi.GPIO as GPIO
 import time
 sound = 12
+tilt = 26
 red = 22
-GPIO,setwarnings(False)
-GPIO. setmode (GPIO. BCM)
-GPIO. setup (sound, GPIO. IN)
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(sound, GPIO.IN)
+GPIO.setup(tilt, GPIO.IN)
 GPIO.setup(red, GPIO.OUT)
-def callback( sound):
-if GPIO.input (sound):
-print ("Sound Found")
-GPIO.output(red, GPIO.HIGH)
-time.sleep(0.1)
-GPIO.output(red, GPIO. LOW)
-else:
-GPIO.output(red, GPIO.LOW)
-GPIO. add _event_ detect (sound, GPIO.BOTH, bouncetime=300)
-GPI0. add_event_callback(sound, callback)
-while True:
-time.sleep(1)
+try:
+    while 1:
+        SoundValue = GPIO.input(sound)
+        TiltValue = GPIO.input(tilt)
+        if (SoundValue == 1):
+            print ("Sound Found")
+            GPIO.output(red, GPIO.HIGH)
+            time.sleep(0.1)
+            GPIO.output(red, GPIO.LOW)
+        elif (TiltValue == 0):
+            print ("Tilt Detected")
+            GPIO.output(red, GPIO.HIGH)
+            time.sleep(0.1)
+            GPIO.output(red, GPIO.LOW)
+        else:
+            GPIO.output(red, GPIO.LOW)
+except KeyboardInterrupt:
+    pass
+    print("Exiting")
+    GPIO.cleanup()
